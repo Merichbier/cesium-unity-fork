@@ -377,7 +377,7 @@ namespace CesiumForUnity
                     library.ExtraConfigureArgs.Add("-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a");
             }
 
-            if (platform.platformGroup == BuildTargetGroup.iOS || platform.platformGroup == BuildTargetGroup.VisionOS) 
+            if (platform.platformGroup == BuildTargetGroup.iOS) 
             {
                 library.Toolchain = "extern/ios-toolchain.cmake";
                 library.ExtraConfigureArgs.Add("-GXcode");
@@ -385,6 +385,15 @@ namespace CesiumForUnity
                 library.ExtraConfigureArgs.Add("-DCMAKE_SYSTEM_PROCESSOR=aarch64");
                 library.ExtraConfigureArgs.Add("-DCMAKE_OSX_ARCHITECTURES=arm64");
                 library.ExtraConfigureArgs.Add("-DOSX_DEPLOYMENT_TARGET=12");
+            }
+            if (platform.platformGroup == BuildTargetGroup.VisionOS) 
+            {
+                library.Toolchain = "extern/visionos-toolchain.cmake";
+                library.ExtraConfigureArgs.Add("-GXcode");
+                library.ExtraConfigureArgs.Add("-DCMAKE_SYSTEM_NAME=visionOS");
+                library.ExtraConfigureArgs.Add("-DCMAKE_SYSTEM_PROCESSOR=aarch64");
+                library.ExtraConfigureArgs.Add("-DCMAKE_OSX_ARCHITECTURES=arm64");
+                library.ExtraConfigureArgs.Add("-DOSX_DEPLOYMENT_TARGET=2.2");
             }
 
             if (platform.platform == BuildTarget.StandaloneOSX)
